@@ -4,6 +4,7 @@
 void detectComment();
 
 int state = 0;
+int state_ori = 0;
 char ch;
 char buf1;
 
@@ -31,7 +32,6 @@ void detectComment(){
 	if (ch == '/' && state == 0){
 		state = 1;
 		buf1 = ch;
-		
 	}
 	else if (state == 1 && ch == '/'){
 		state = 2;
@@ -50,6 +50,9 @@ void detectComment(){
 	else if (ch == '"' && state == 0){
 		state = 5;
 	}
+	else if (state == 5 && ch == '"'){
+		state = 0;
+	}
 	else if (state == 2 && ch == '\n'){
 		state = 0;
 	}
@@ -62,10 +65,16 @@ void detectComment(){
 	}
 	else if (state == 4 && ch != '/'){
 		state = 3;
-		printf("%c", buf1);
 	}
 	else if (state == 7){
 		state = 0;
+	}
+	else if ((state == 0 || state == 5) && (ch == '\\')){
+		state_ori = state;
+		state = 6;
+	}
+	else if (state == 6){
+		state = state_ori;
 	}
 }
 
