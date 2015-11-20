@@ -8,6 +8,9 @@ int state_ori = 0;
 char ch;
 char buf1;
 
+sadhaiowhdoaiwndoaiwnd
+
+
 int main(){
 	FILE *fp;
 	fp = fopen ("Filter.cpp", "r");
